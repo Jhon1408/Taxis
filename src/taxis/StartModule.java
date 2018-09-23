@@ -10,6 +10,7 @@
  */
 package taxis;
 
+import javax.swing.JOptionPane;
 import taxis.Frames.*;
 
 public class StartModule {
@@ -20,8 +21,9 @@ public class StartModule {
     }
     
     private static void startLogin() {
+        JOptionPane.showMessageDialog(null, "Terminado");
         Login login = new Login();
-        login.setVisible(true);
+        login.setVisible(true);     
     }
     
     

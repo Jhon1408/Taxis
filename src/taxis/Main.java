@@ -13,16 +13,14 @@ package taxis;
 import javax.swing.JOptionPane;
 
 public class Main {
-
-    public void main() {
-        //Calling the startModule
+    public static void main(String[] args) {
+        //Calling the startModule       
         JOptionPane.showMessageDialog(null, "Iniciando...");
         startMenu();
     }
     
-    public void startMenu() {      
-        StartModule start = new StartModule();
-        start.main = this;       
+    public static void startMenu() {      
+        StartModule start = new StartModule();     
         start.startAll();
     }
     
