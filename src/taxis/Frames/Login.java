@@ -10,14 +10,17 @@
  */
 package taxis.Frames;
 
+import java.sql.*;
 import javax.swing.JOptionPane;
-
+import taxis.Conexion;
 /**
  *
  * @author jhonatan
  */
 public class Login extends javax.swing.JFrame {
-
+    
+    Connection con = Conexion.main();
+   
     public Login() {      
         initComponents();
     }

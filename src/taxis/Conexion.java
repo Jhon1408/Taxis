@@ -9,7 +9,7 @@
  * limitations under the License.
  */
 package taxis;
-
+import java.sql.*;
 /**
  *
  * @author jhonatan
@@ -19,4 +19,16 @@ public class Conexion {
         Creacion de la clase conexion para usar una base de datos
         alojada en localhost/xampp
     */
+    
+    public static Connection main(){
+        Connection con = null;
+        try {  
+            Class.forName("com.mysql.jdbc.Driver");  
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Taxis","root","");
+            return con;
+        } catch(ClassNotFoundException | SQLException e) {
+            System.out.println(e);
+            return con;
+        }    
+    }
 }
