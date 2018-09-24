@@ -20,7 +20,7 @@ public class Conexion {
         alojada en localhost/xampp
     */
     
-    public static Connection main(){
+    public static Connection getConnection(){
         Connection con = null;
         try {  
             Class.forName("com.mysql.jdbc.Driver");  

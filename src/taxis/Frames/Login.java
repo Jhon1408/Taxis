@@ -19,7 +19,7 @@ import taxis.Conexion;
  */
 public class Login extends javax.swing.JFrame {
     
-    Connection con = Conexion.main();
+    Connection con = Conexion.getConnection();
    
     public Login() {      
         initComponents();
