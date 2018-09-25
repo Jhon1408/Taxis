@@ -10,18 +10,20 @@
  */
 package taxis;
 
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 
 public class Main {
+    static Connection con = ServerConnection.getConnection();
     public static void main(String[] args) {
-        //Calling the startModule       
+        //Calling the startModule      
         JOptionPane.showMessageDialog(null, "Iniciando...");
         startMenu();
     }
     
     public static void startMenu() {      
-        StartModule start = new StartModule();     
-        start.startAll();
+        StartModule.con = con;
+        StartModule.startAll();
     }
     
 }

@@ -10,20 +10,25 @@
  */
 package taxis;
 
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 import taxis.Frames.*;
 
 public class StartModule {
     Main main;
+    public static Connection con;
     
     public static void startAll() {
+        Request.con = con;
+        Login.con = con;
         startLogin();
     }
     
     private static void startLogin() {
         JOptionPane.showMessageDialog(null, "Terminado");
-        Login login = new Login();
-        login.setVisible(true);     
+        Login login = new Login();        
+        login.setVisible(true);
+        
     }
     
     

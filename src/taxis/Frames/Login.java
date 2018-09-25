@@ -12,14 +12,14 @@ package taxis.Frames;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import taxis.Conexion;
+import taxis.Request;
 /**
  *
  * @author jhonatan
  */
 public class Login extends javax.swing.JFrame {
     
-    Connection con = Conexion.getConnection();
+    public static Connection con;
    
     public Login() {      
         initComponents();
@@ -97,19 +97,17 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (NombreIn.getText().equalsIgnoreCase("admin")) {
-            if (ContraseñaIn.getText().equals("admin1234")) {
-                JOptionPane.showMessageDialog(null, "Ingresando...");
-                System.exit(0);
-            } else {
-                JOptionPane.showMessageDialog(null, "Contraseña invalida...");
-                ContraseñaIn.setText("");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Nombre de usuario incorrecto...");
-            NombreIn.setText("");
-            ContraseñaIn.setText("");
-        }     
+        String user = NombreIn.getText();
+        String pass = ContraseñaIn.getText();
+        PreparedStatement Statement;
+        Statement = Request.getContext("INSERT", "LOGIN");
+        try {
+            Statement.setString(1, user);
+            Statement.setString(2, pass);
+            Statement.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Se ah detectado un problema.\n"+e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {

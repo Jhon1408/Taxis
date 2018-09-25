@@ -10,11 +10,12 @@
  */
 package taxis;
 import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author jhonatan
  */
-public class Conexion {
+public class ServerConnection {
     /*
         Creacion de la clase conexion para usar una base de datos
         alojada en localhost/xampp
@@ -25,9 +26,10 @@ public class Conexion {
         try {  
             Class.forName("com.mysql.jdbc.Driver");  
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Taxis","root","");
+            JOptionPane.showMessageDialog(null, "Conectado a la base de datos.");
             return con;
         } catch(ClassNotFoundException | SQLException e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
             return con;
         }    
     }
