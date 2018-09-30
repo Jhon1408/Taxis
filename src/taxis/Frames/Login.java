@@ -19,8 +19,6 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import taxis.Request;
 /**
  *
@@ -35,11 +33,6 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     @SuppressWarnings("unchecked")
@@ -58,8 +51,6 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 240));
         setResizable(false);
-
-        jPanel1.setForeground(java.awt.Color.darkGray);
 
         jButton1.setText("Ingresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +153,7 @@ public class Login extends javax.swing.JFrame {
                    Platform platform = new Platform();
                    platform.setVisible(false);
                    platform.setVisible(true);
-                   platform.login = this;
+                   platform.username.setText(user);
                } else {
                    JOptionPane.showMessageDialog(null, "Contraseña incorrecta.\nIntentalo de nuevo.\n");
                    ContraseñaIn.setText("");
