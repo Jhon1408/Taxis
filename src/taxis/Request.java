@@ -28,7 +28,7 @@ public class Request {
                 case ("LOGIN"):
                     switch(requestType) {
                         case ("INSERT"):
-                            sql = "INSERT INTO Login_Data(user, pass) VALUES (?,?)";
+                            sql = "INSERT INTO Login_Data(user, pass, salt) VALUES (?,?,?)";
                             Statement = con.prepareStatement(sql);
                             break;
                         case ("SEARCH_USER"):

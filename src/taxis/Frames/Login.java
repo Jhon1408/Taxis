@@ -12,7 +12,12 @@ package taxis.Frames;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import taxis.Request;
 /**
@@ -135,7 +140,14 @@ public class Login extends javax.swing.JFrame {
             Statement.execute();
             ResultSet result = Statement.getResultSet();
             if (result.next() && result.getString("user").equals(user)) {
-               if(result.getString("pass").equals(pass)) {
+                pass = pass.concat(result.getString("salt"));
+                MessageDigest m = MessageDigest.getInstance("MD5");
+                m.reset();
+                m.update(pass.getBytes());
+                byte[] digest = m.digest();
+                BigInteger bigInt = new BigInteger(1,digest);
+                String hashtext = bigInt.toString(16);
+               if(result.getString("pass").equals(hashtext)) {
                    JOptionPane.showMessageDialog(null, "Haz ingresado correctamente.\n");
                } else {
                    JOptionPane.showMessageDialog(null, "Contraseña incorrecta.\nIntentalo de nuevo.\n");
@@ -148,6 +160,8 @@ public class Login extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Se ah detectado un problema.\n"+e);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -12,7 +12,14 @@ package taxis.Frames;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.*;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import taxis.Request;
 
@@ -31,6 +38,13 @@ public class Register extends javax.swing.JFrame {
         initComponents();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+    }
+    
+    public byte[] generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[20];
+        random.nextBytes(bytes);
+        return bytes;
     }
 
     /**
@@ -151,9 +165,18 @@ public class Register extends javax.swing.JFrame {
                             ContraseñaIn.setText("");
                             ContraseñaInConfirm.setText("");
                         } else {
+                            String salt = Arrays.toString(generateSalt());
+                            pass = pass.concat(salt);
+                            MessageDigest m = MessageDigest.getInstance("MD5");
+                            m.reset();
+                            m.update(pass.getBytes());
+                            byte[] digest = m.digest();
+                            BigInteger bigInt = new BigInteger(1,digest);
+                            String hashtext = bigInt.toString(16);
                             Statement = Request.getContext("LOGIN", "INSERT");
                             Statement.setString(1, user);
-                            Statement.setString(2, pass);
+                            Statement.setString(2, hashtext);
+                            Statement.setString(3, salt);
                             Statement.executeUpdate();
                             JOptionPane.showMessageDialog(null, "Registro exitoso.\n");
                             NombreIn.setText("");
@@ -167,6 +190,8 @@ public class Register extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Se ah detectado un problema.\n"+e);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }           
     }//GEN-LAST:event_RegistrarActionPerformed
 
