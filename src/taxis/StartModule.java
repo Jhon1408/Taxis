@@ -28,6 +28,7 @@ public class StartModule {
         login.setVisible(true);
         Register register = new Register();
         register.setVisible(false);
+        //Conexion Login - Register
         login.regist = register;
         register.login = login;
     }
