@@ -11,7 +11,6 @@
 package taxis;
 
 import java.sql.Connection;
-import javax.swing.JOptionPane;
 import taxis.Frames.*;
 
 public class StartModule {
@@ -25,10 +24,12 @@ public class StartModule {
     }
     
     private static void startLogin() {
-        JOptionPane.showMessageDialog(null, "Terminado");
-        Login login = new Login();        
+        Login login = new Login();
         login.setVisible(true);
-        
+        Register register = new Register();
+        register.setVisible(false);
+        login.regist = register;
+        register.login = login;
     }
     
     

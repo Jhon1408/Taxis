@@ -20,21 +20,21 @@ import javax.swing.JOptionPane;
 public class Request {
     static Connection con;
     
-    public static PreparedStatement getContext(String requestType, String table) {       
+    public static PreparedStatement getContext(String table, String requestType) {       
         PreparedStatement Statement = null;
         String sql;
         try {
-            switch(requestType) {
-                case ("INSERT"):
-                    switch(table) {
-                        case ("LOGIN"):
+            switch(table) {
+                case ("LOGIN"):
+                    switch(requestType) {
+                        case ("INSERT"):
                             sql = "INSERT INTO Login_Data(user, pass) VALUES (?,?)";
                             Statement = con.prepareStatement(sql);
                             break;
-                        case (""):
-                            sql = "";
+                        case ("SEARCH_USER"):
+                            sql = "SELECT * FROM Login_Data WHERE user = ?";
                             Statement = con.prepareStatement(sql);
-                            break;
+                            break;                       
                     }               
                     return Statement;                
                 case (" "):

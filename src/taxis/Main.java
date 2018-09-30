@@ -11,13 +11,11 @@
 package taxis;
 
 import java.sql.Connection;
-import javax.swing.JOptionPane;
 
 public class Main {
     static Connection con = ServerConnection.getConnection();
     public static void main(String[] args) {
         //Calling the startModule      
-        JOptionPane.showMessageDialog(null, "Iniciando...");
         startMenu();
     }
     
