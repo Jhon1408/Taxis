@@ -25,7 +25,7 @@ public class ServerConnection {
         Connection con = null;
         try {  
             Class.forName("com.mysql.jdbc.Driver");  
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Taxis","root","");
+            con = DriverManager.getConnection("jdbc:mysql://85.10.205.173:3306/taxis_db","taxis_db","root1234");
             JOptionPane.showMessageDialog(null, "Conectado a la base de datos.");
             return con;
         } catch(ClassNotFoundException | SQLException e) {
